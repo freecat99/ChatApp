@@ -7,6 +7,7 @@ import Profile from './Pages/Profile'
 import Register from './Pages/Register'
 import Login from './Pages/Login'
 import { useAuthState } from './States/useAuthState'
+import NotFound from './Pages/NotFound'
 
 function App() {
   const {authUser, checkAuth} = useAuthState();
@@ -23,10 +24,12 @@ function App() {
         <Navbar/>
 
         <Routes>
+          <Route path='/' element={authUser?<Home/>:<Navigate to = '/login'/>}/>
           <Route path='/home' element={authUser?<Home/>:<Navigate to = '/login'/>}/>
           <Route path='/login' element={authUser?<Login/>:<Navigate to = '/register'/>}/>
           <Route path='/register' element={!authUser?<Register/>:<Navigate to = '/login'/>}/>
           <Route path='/profile' element={authUser?<Profile/>:<Navigate to = '/login'/>}/>
+          <Route path='*' element={<NotFound/>}/>
         </Routes>
 
     </div>

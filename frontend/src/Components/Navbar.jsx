@@ -4,8 +4,12 @@ import { useAuthState } from '../States/useAuthState';
 const Navbar = () => {
   const {authUser} = useAuthState();    
   return (
-    <div>
-      Navbar
+    <div className="navbar">
+      <div>
+        <img src="./chatterLogo.png" alt="" />
+        <p>Chatter</p>
+      </div>
+      <button><a>{authUser?'Logout':'Login'}</a></button>
     </div>
   )
 }
