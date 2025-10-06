@@ -9,13 +9,31 @@
     box-sizing: border-box;
 
     font-family: 'Montserrat', sans-serif;
+    cursor: default;
 
 }
 
+input, button, a, .linkthis{
+    cursor: pointer;
+}
 
 body, html{
     width: 100%;
     min-height: 100vh;
+}
+
+/* remove blue shadow on autofill */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-background-clip: text;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 
@@ -70,12 +88,69 @@ body, html{
 
 .navbar button:hover{
     background: rgba(65, 65, 65, 0.2);
-
+    
 }
 
-.register{
-    padding: 1rem;
-    border: 1px solid white;
-    display: flex;
+
+.container{
     
+    border: 1px solid rgba(255, 255, 255, 0.125);
+    border-radius: 10px;
+    margin: 2rem auto;
+    width: fit-content;
+    padding: 2rem;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.2rem;
+    background-color: #171c22;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.register legend{
+    margin: .5rem 1rem 2rem 1rem;
+    font-weight: 600;
+    color: #dadde4;
+}
+
+.register label{
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    background-color: rgba(82, 82, 82, 0.313);
+    padding: .4rem;
+    margin: 1rem;
+    border-radius: 10px;
+    background-color: #272c32;
+    border: 1px solid rgba(255, 255, 255, 0.125);
+}
+
+.register input{
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+
+.register p{
+    font-size: 1rem;
+}
+
+.register .togglelog{
+    color: #dadde4;
+}
+
+.register button{
+    width: 100%;
+    border-radius: 10px;
+    font-size: 1rem;
+    padding: .51rem;
+    background-color: rgb(18, 70, 214);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.125);
+    margin: .5rem 0;
 }

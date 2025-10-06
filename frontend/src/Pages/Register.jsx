@@ -1,31 +1,28 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import { FaUser, FaEnvelope, FaKey } from "react-icons/fa"
 
 const Register = () => {
+  const navigate = useNavigate();
   return (
-    <div className='register'>
-      <label className="input validator">
-  <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-    <g
-      strokeLinejoin="round"
-      strokeLinecap="round"
-      strokeWidth="2.5"
-      fill="none"
-      stroke="currentColor"
-    >
-      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
-      <circle cx="12" cy="7" r="4"></circle>
-    </g>
-  </svg>
-  <input
-    type="text"
-    required
-    placeholder="Username"
-    pattern="[A-Za-z][A-Za-z0-9\-]*"
-    minlength="3"
-    maxlength="30"
-    title="Only letters, numbers or dash"
-  />
-</label>
+    <div className='container register'>
+      <legend>Create Account</legend>
+      <form action="">
+        <label htmlFor="name input">
+          <div className="icon"><FaUser/></div>
+          <input type="text" name="name" id="name" placeholder='Name' required />
+        </label>
+        <label htmlFor="email input">
+          <div className="icon"><FaEnvelope /></div>
+          <input type="email" name="email" id="email" placeholder='Email' required />
+        </label>
+        <label htmlFor="password input">
+          <div className="icon"><FaKey /></div>
+          <input type="password" name="password" id="password" placeholder='Password' required />
+        </label>
+        <button type="submit ">Register</button>
+        <p>Already have an account? <span className="togglelog linkthis" onClick={()=>{navigate('/login')}}>Login here</span></p>
+      </form>
 
     </div>
   )
