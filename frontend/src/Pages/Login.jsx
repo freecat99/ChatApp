@@ -1,10 +1,13 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FaEnvelope, FaKey } from "react-icons/fa"
+import NavbarNaked from '../Components/NavbarNaked';
 
 const Login = () => {
   const navigate = useNavigate();
   return (
+    <div>
+      <NavbarNaked/>
     <div className='container register'>
       <legend>Welcome Back</legend>
       <form action="">
@@ -20,6 +23,7 @@ const Login = () => {
         <p>Don't have an account? <span className="togglelog linkthis" onClick={()=>{navigate('/register')}}>Register here</span></p>
       </form>
 
+    </div>
     </div>
   )
 }
