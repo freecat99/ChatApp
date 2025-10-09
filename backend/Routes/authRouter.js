@@ -1,12 +1,13 @@
 import express from 'express'
 import { checkAuth, login, logout, register, updateProfilepic } from '../Controllers/authController.js';
 import { authenticated } from '../Middlewares/authenticated.js';
+import { loginvalidate, registervalidate } from '../Middlewares/validation.js';
 
 const router = express.Router();
 
-router.post('/register', register);
+router.post('/register', registervalidate, register);
 
-router.post('/login', login);
+router.post('/login', loginvalidate, login);
 
 router.post('/logout', logout);
 

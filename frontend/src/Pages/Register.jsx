@@ -1,19 +1,25 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { FaUser, FaEnvelope, FaKey } from "react-icons/fa"
 import NavbarNaked from '../Components/NavbarNaked';
+
+import {toast, Toaster} from 'react-hot-toast';
+import { FaUser, FaEnvelope, FaKey, FaEye, FaEyeSlash  } from "react-icons/fa"
 
 const Register = () => {
   const navigate = useNavigate();
+  const [show, setShow] = useState(false);
   const [userInfo, setUserInfo] = useState({
     name:'',
     email:'',
     password:''
   })
 
+  const toggleShow = () =>{
+    show?setShow(false):setShow(true);
+  }
+
   const handleChange = (e) => {
     const {name, value} = e.target;
-    console.log(name, value);
     let copyUserInfo = {...userInfo};
     copyUserInfo[name] = String(value);
     setUserInfo(copyUserInfo);
@@ -34,7 +40,15 @@ const Register = () => {
 
     const response = await fetch(url, options);
     const result = await response.json();
-    console.log('res', result);
+
+    if(result.error){
+      toast.error(result.error, {position:'bottom-right'});
+    }else{
+      toast.success('Registered!', {position:'bottom-right'})
+      setTimeout(()=>{
+        navigate('/login');
+      }, 2000)
+    }
 
   }
 
@@ -55,13 +69,25 @@ const Register = () => {
         </label>
         <label htmlFor="password input">
           <div className="icon"><FaKey /></div>
-          <input type="password" name="password" id="password" placeholder='Password' required onChange={handleChange}/>
+          <input type={show?'text':'password'} name="password" id="password" placeholder='Password' required onChange={handleChange}/>
+          <>
+            <span className='eye' onClick={toggleShow}>{show?<FaEye />:<FaEyeSlash />}</span>
+          </>
         </label>
         <button type="submit ">Register</button>
         <p>Already have an account? <span className="togglelog linkthis" onClick={()=>{navigate('/login')}}>Login here</span></p>
       </form>
 
     </div>
+    <Toaster 
+    toastOptions={{
+      style:{
+        backgroundColor:'#1d232a',
+        border: '1px solid rgba(255, 255, 255, 0.125)',
+        color:'white'
+      }
+    }}
+    />
     </div>
   )
 }
