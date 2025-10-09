@@ -75,27 +75,43 @@ select:-webkit-autofill:focus {
 }
 
 .navbar button{
-    padding: 4px;
+    height: 40px;
+    padding: 7px;
     background: rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
+    border-radius: 15px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     outline: 1px solid rgba(255, 255, 255, 0.3);
-
+    
     transition: all .1s ease-in;
-}
-
-.navbar button a{
+    margin: .51rem;
     font-weight: 600;
     cursor: pointer;
 }
+
 
 .navbar button:hover{
     background: rgba(65, 65, 65, 0.2);
     
 }
 
+.navbar .profilepic{
+    width: 25px;
+    aspect-ratio: 1;
+    border-radius: 100%;
+    object-fit: cover;
+    object-position: center;
+    outline: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.navbar .fragment{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    cursor: pointer;
+}
 
 .container{
     
