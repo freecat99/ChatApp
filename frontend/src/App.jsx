@@ -28,26 +28,28 @@ function App() {
   return (
     <div>
         <Routes>
+          {/* protected routes */}
           <Route
           path="/"
           element={authUser ? <Home /> : <Navigate to="/login" replace />}
-        />
+          />
         <Route
           path="/home"
           element={authUser ? <Home /> : <Navigate to="/login" replace />}
-        />
+          />
         <Route
-          path="/profile"
+          path="/profile/:id"
           element={authUser ? <Profile /> : <Navigate to="/login" replace />}
-        />
+          />
 
+        {/* public routes */}
         <Route
           path="/login"
-          element={!authUser ? <Login /> : <Navigate to="/home" replace />}
+          element={<Login />}
         />
         <Route
           path="/register"
-          element={!authUser ? <Register /> : <Navigate to="/home" replace />}
+          element={<Register />}
         />
 
         <Route path="*" element={<NotFound />} />

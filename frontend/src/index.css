@@ -176,3 +176,46 @@ select:-webkit-autofill:focus {
     border: 1px solid rgba(255, 255, 255, 0.125);
     margin: .5rem 0;
 }
+
+.profile label{
+    margin: 2rem;
+    position: relative;
+}
+
+.profile .profilepic{
+    margin-bottom: 2rem ;
+}
+
+
+.profile .userInfoTag{
+    position: absolute;
+    margin-top: -50px;
+    font-weight: 600;
+    border-radius: 5px;
+    padding: 2px;
+    padding-bottom: 0;
+    letter-spacing: -1px;
+
+}
+
+.profile .userInfoValue{
+    font-size: 1.5rem;
+}
+
+.notFound{
+    width: 100%;
+    height: 100vh;
+    border: 1px solid red;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem;
+
+    font-size: 3rem;
+    font-weight: 600;
+}
+
+.notFound p{
+    font-size: 6rem;
+}
