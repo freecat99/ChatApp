@@ -1,12 +1,12 @@
 import React from 'react'
 import { useAuthState } from '../States/useAuthState';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
-  const {authUser} = useAuthState();    
   return (
     <div className="navbar">
       <div>
-        <img src="./chatterLogo.png" alt="" />
+        <img src="/chatterLogo.png" alt="" />
         <p>Chatter</p>
       </div>
     </div>

@@ -43,46 +43,47 @@ const Profile = () => {
         },
         body:JSON.stringify({profilepic})
       }
-
+      
       const response = await fetch(url, options);
       const result = await response.json();
+  
 
-      console.log(result);
-
-
+      
+      
     } catch (error) {
       console.log(error);
     }
   }
-
+  
   useEffect(()=>{
     getUser();
   },[])
-
+  
   const handleImageUpload = async(e) => {
     const image = e.target.files[0];
     if(!image){return;}
-
+    
     const reader = new FileReader();
     reader.readAsDataURL(image);
-
+    
     reader.onload = async() => {
       const base64image = reader.result;
       setUploadedImage(base64image);
-      toast.success('Updated profile picture!', {position:'bottom-right'})
-      const res = await updateProfile({profilepic: base64image});
-      if(res){
-      }
+      
+      toast.promise(
+        updateProfile(base64image),
+        {
+          loading: 'Saving...',
+          success: <b>Profile Picture saved!</b>,
+          error: <b>Could not save.</b>,
+        }
+      );
     }
 
 
     console.log(image)
     
   }
-
-const handleSubmit = (e) =>{
-  e.preventDefault();
-}
 
   return (
     <div>
