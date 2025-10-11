@@ -3,13 +3,10 @@ import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import NavbarNaked from '../Components/NavbarNaked';
 
 import {toast, Toaster} from 'react-hot-toast';
-import { FaUser, FaCamera , FaKey, FaEye, FaEyeSlash  } from "react-icons/fa"
+import { FaCamera, FaPoundSign } from "react-icons/fa"
 
 const Profile = () => {
-  const navigate = useNavigate();
-  const id = useParams('id');
-  console.log('here',id)
-  const [show, setShow] = useState(false);
+  const [uploadedImage, setUploadedImage] = useState(null);
   const [userInfo, setUserInfo] = useState({
     name:'',
     email:'',
@@ -32,8 +29,29 @@ const Profile = () => {
 
     } catch (error) {
       console.log(error);
-    } finally{
-      setIsLoading(false);
+    }
+  }
+
+  const updateProfile = async(profilepic) => {
+    try {
+      const url = 'http://localhost:1601/auth/updateProfilepic';
+      const options = {
+        method:'PUT',
+        credentials:'include',
+        headers:{
+          'Content-Type' : 'application/json'
+        },
+        body:JSON.stringify({profilepic})
+      }
+
+      const response = await fetch(url, options);
+      const result = await response.json();
+
+      console.log(result);
+
+
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -41,39 +59,30 @@ const Profile = () => {
     getUser();
   },[])
 
-  const handleChange = (e) => {
-    const {name, value} = e.target;
-    let copyUserInfo = {...userInfo};
-    copyUserInfo[name] = String(value);
-    setUserInfo(copyUserInfo);
-  }
+  const handleImageUpload = async(e) => {
+    const image = e.target.files[0];
+    if(!image){return;}
 
-  const handleSubmit = async(e) => {
-    e.preventDefault();
+    const reader = new FileReader();
+    reader.readAsDataURL(image);
+
+    reader.onload = async() => {
+      const base64image = reader.result;
+      setUploadedImage(base64image);
+      toast.success('Updated profile picture!', {position:'bottom-right'})
+      const res = await updateProfile({profilepic: base64image});
+      if(res){
+      }
+    }
+
+
+    console.log(image)
     
-    const url = 'http://localhost:1601/auth/register';
-    const options = {
-      method:'POST',
-      headers:{
-        'Content-Type': 'application/json'
-      },
-      credentials:'include',
-      body:JSON.stringify(userInfo)
-    }
-
-    const response = await fetch(url, options);
-    const result = await response.json();
-
-    if(result.error){
-      toast.error(result.error, {position:'bottom-right'});
-    }else{
-      toast.success('Registered!', {position:'bottom-right'})
-      setTimeout(()=>{
-        navigate('/login');
-      }, 2000)
-    }
-
   }
+
+const handleSubmit = (e) =>{
+  e.preventDefault();
+}
 
   return (
     <div>
@@ -81,11 +90,15 @@ const Profile = () => {
     
     <div className='container register profile'>
       <legend>Your Profile</legend>
-      <form action="" onSubmit={handleSubmit} encType=''> 
-        <label htmlFor="profilepic" className='profilepic'>
-          <input type="file" name="profilepic" id="profilepic" />
-        <button type="submit" className='submitcam'><FaCamera /></button>
+      <form action="" encType=''> 
+        <div className='wholeimage'>
+        <img src={uploadedImage || userInfo.profilepic || '/defaultprofilepic.png'} alt="profile picture" className='profilepicture'/>
+        <label htmlFor="profilepic" className='profilepic-label'>
+          <span><FaCamera className='submitcam' /></span>
+          <input type="file" name="profilepic" id="profilepic" accept='image/*' className='hidden' onChange={handleImageUpload}/>
         </label>
+        </div>
+
         <label htmlFor="" className='userInfo'>
           <div className='userInfoTag'>Name</div>
           <p className='userInfoValue'>{userInfo.name}</p>          

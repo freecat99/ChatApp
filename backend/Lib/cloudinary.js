@@ -5,8 +5,8 @@ config();
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARYCLOUD,
-    api_key: process.env.CLOUDINARYKEY,
-    api_secret: process.env.CLOUDINARYSECRET
+    api_key: process.env.CLOUDINARYAPIKEY,
+    api_secret: process.env.CLOUDINARYAPISECRET
 });
 
 export default cloudinary;

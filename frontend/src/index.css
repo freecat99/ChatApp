@@ -13,6 +13,10 @@
 
 }
 
+.hidden{
+    display: none;
+}
+
 input, button, a, .linkthis{
     cursor: pointer;
 }
@@ -178,12 +182,8 @@ select:-webkit-autofill:focus {
 }
 
 .profile label{
-    margin: 2rem;
+    margin: 1.8rem;
     position: relative;
-}
-
-.profile .profilepic{
-    margin-bottom: 2rem ;
 }
 
 
@@ -195,17 +195,49 @@ select:-webkit-autofill:focus {
     padding: 2px;
     padding-bottom: 0;
     letter-spacing: -1px;
-
+    
 }
 
 .profile .userInfoValue{
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+}
+
+.wholeimage{
+    margin: auto;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.profilepic-label{
+    cursor: pointer;
+    width: fit-content;
+    border-radius: 50%;
+    position: absolute;
+    top: -50px;
+    left: 110px;
+    
+}
+
+.profilepicture{
+    background-color: #000000;
+    width: 90px;
+    aspect-ratio: 1;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+    outline: 1px solid rgba(255, 255, 255, 0.3);
+    margin: auto;    
+    position: relative;
+}
+
+.submitcam{
+    cursor: pointer;
 }
 
 .notFound{
     width: 100%;
     height: 100vh;
-    border: 1px solid red;
 
     display: flex;
     flex-direction: column;
