@@ -47,6 +47,7 @@ select:-webkit-autofill:focus {
 
 
 .navbar{
+    height: 10vh;
     position: sticky;
     top: 0;
     
@@ -233,6 +234,30 @@ select:-webkit-autofill:focus {
 
 .submitcam{
     cursor: pointer;
+}
+
+.status{
+    color: rgb(40, 214, 40);
+}
+
+.page{
+    height: 100%;
+}
+
+.home{
+    border: 1px solid red;
+    min-height: 90vh;
+    display: flex;
+}
+
+.sidebar{
+    width: 20vw;
+    border: 1px solid green;
+}
+
+.chatContainer{
+    width: 100%;
+    border: 1px solid blue;  
 }
 
 .notFound{

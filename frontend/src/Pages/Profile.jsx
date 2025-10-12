@@ -10,7 +10,8 @@ const Profile = () => {
   const [userInfo, setUserInfo] = useState({
     name:'',
     email:'',
-    profilepic:''
+    profilepic:'',
+    date:'',
   })
   const getUser = async() =>{
     try {
@@ -21,10 +22,18 @@ const Profile = () => {
       }
       const response = await fetch(url, options);
       const result = await response.json();
+      const date = new Date(result.createdAt);
+      const formatted = date.toLocaleDateString('en-us', {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      });
+
       setUserInfo({
         name:result.name,
         profilepic:result.profilepic,
         email:result.email,
+        date:formatted
       })
 
     } catch (error) {
@@ -108,6 +117,8 @@ const Profile = () => {
           <div className='userInfoTag'>Email address</div>
           <p className='userInfoValue'>{userInfo.email}</p>          
         </label>
+        <p><strong>Member since: </strong>{userInfo.date}</p>
+        <p><strong>Status: </strong><span className="status">Active</span></p>
       </form>
 
 
