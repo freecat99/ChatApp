@@ -17,6 +17,7 @@
     display: none;
 }
 
+
 input, button, a, .linkthis{
     cursor: pointer;
 }
@@ -29,6 +30,7 @@ body, html{
 body{
     background-color: #1d232a;
     color: #c1c4cc;
+    overflow: hidden;
 }
 
 /* remove blue shadow on autofill */
@@ -245,8 +247,8 @@ select:-webkit-autofill:focus {
 }
 
 .home{
-    min-height: 88vh;
     display: flex;
+    height: calc(100vh - 10vh);
 }
 
 .sidebar{
@@ -259,9 +261,10 @@ select:-webkit-autofill:focus {
 }
 
 .chatContainer{
-    width: 100%;
     display: flex;
     flex-direction: column;
+    width: 100%;
+    height: 100%;
 }
 
 .noChatContainer{
@@ -315,6 +318,7 @@ select:-webkit-autofill:focus {
 }
 
 .chatContainerHeader{
+    flex: 0 0 auto;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -343,11 +347,13 @@ select:-webkit-autofill:focus {
 }
 
 .chatContainerChats{
-    height: 100%;
+    flex: 1 1 auto;
+    overflow-y: auto;
     background-color: #00000057;
 }
 
 .chatContainerInput{
+    flex: 0 0 auto;
     background-color: #13171c;
     
 }
@@ -422,6 +428,39 @@ select:-webkit-autofill:focus {
 
 .cancel:hover{
     color: white;
+}
+
+.blue{
+    color: #c3d7f0;
+    font-weight: 600;
+}
+
+.profile p .deleteaccount{
+    background-color: red;
+    width: fit-content;
+    height: fit-content;
+    font-size: .8rem;
+    margin: 0;
+    padding: .3rem;
+    font-weight: 600;
+    background-color: rgb(231, 6, 6);
+    transition: all .2s ease;
+}
+
+.profile p .deleteaccount:hover{
+    background-color: rgb(249, 6, 6);
+}
+
+.confirmDeletion{
+    font-size: .8rem;
+}
+
+.confirmDeletion button{
+    font-size: .8rem;
+    font-weight: 500;
+    padding: .5rem .2rem;
+    border-radius: 10px;
+    margin: .21rem;
 }
 
 .notFound{

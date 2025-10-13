@@ -142,6 +142,17 @@ export const checkAuth = (req, res) =>{
         res.status(500).json({message:`Internal server error, ${error}`});        
     }
 }
+
+export const deleteUser = async(req, res) =>{
+    try {
+        const userId = req.user._id;
+        await User.findByIdAndDelete(userId);
+        res.cookie('jwt', '', { maxAge: 0 }); 
+        res.status(200).json({message:'Deleted user', success:true})      
+    } catch (error) {
+        res.status(500).json({message:`Internal server error, ${error}`, success:false});        
+    }
+}
 /* 
 export const getUser = async(req, res) =>{
     try {

@@ -7,7 +7,7 @@ import MssgInput from './MssgInput';
 const ChatContainer = () => {
   
   const {authUser} = useAuthState(); 
-  const {mssgs, setMssgLoad, isMssgsLoading, selectedUser, setSelectedUser} = useChatState();
+  const {messages, setMssgLoad, isMssgsLoading, selectedUser, setSelectedUser} = useChatState();
 
 
   const getMssgs = async() =>{
@@ -21,7 +21,8 @@ const ChatContainer = () => {
           };
           const response = await fetch(url, options);
           const result = await response.json();
-    
+    console.log("Fetched messages:", result);
+
           setMssgLoad(false, result);
     
         } catch (error) {
@@ -30,7 +31,7 @@ const ChatContainer = () => {
       }
     
     useEffect(()=>{
-      if(authUser){
+      if(authUser && selectedUser._id){
         getMssgs();
       }
     },[selectedUser._id]);
@@ -79,6 +80,24 @@ const ChatContainer = () => {
         </div>
       </div>
       <div className="chatContainerChats">
+        {messages && messages.map((mssg)=>(
+          <div 
+            key={mssg._id}
+            className={`chat ${(mssg.senderId===selectedUser._id)?'chat-start':'chat-end'}`}>
+              <div
+                className='chat-header mb-1'>
+                  <time datetime="" className='text-xs opacity-55 ml-1'>
+                    {new Date(mssg.createdAt).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit', hour12: false})}
+                  </time>
+              </div>
+              <div className="chat-bubble flex flex-col blue">
+                {mssg.image && (
+                  <img src={mssg.image} alt="Attachment" className='sm:max-w-[200px] rounded-md mb-2' />
+                )}
+                {mssg.text && <p>{mssg.text}</p>}
+              </div>
+            </div>
+        ))}
       </div>
       <div className="chatContainerInput">
         <MssgInput />

@@ -6,6 +6,8 @@ import {toast, Toaster} from 'react-hot-toast';
 import { FaCamera, FaPoundSign } from "react-icons/fa"
 
 const Profile = () => {
+  const navigate = useNavigate();
+  const [confirmDelete, setConfirmDelete] = useState(false);
   const [uploadedImage, setUploadedImage] = useState(null);
   const [userInfo, setUserInfo] = useState({
     name:'',
@@ -40,6 +42,46 @@ const Profile = () => {
       console.log(error);
     }
   }
+
+  const deleteAccount = (e) => {
+  e.preventDefault();
+
+  toast((t) => (
+    <span className='confirmDeletion'>
+      Confirm delete your account?
+      <button
+        className="btn-active btn-error"
+        onClick={async () => {
+          toast.dismiss(t.id); 
+
+          try {
+            const url = 'http://localhost:1601/auth/deleteAccount';
+            const options = { method: 'DELETE', credentials: 'include' };
+            const response = await fetch(url, options);
+            const result = await response.json();
+
+            if (!result.success) {
+              toast.error("Can't delete now, retry later!");
+              return;
+            }
+
+            toast.success('Deleted your account!');
+            setTimeout(() => navigate('/register'), 2000); 
+          } catch (err) {
+            console.log(err);
+            toast.error('Something went wrong.');
+          }
+        }}
+      >
+        Delete
+      </button>
+      <button className="btn-active" onClick={() => toast.dismiss(t.id)}>
+        Cancel
+      </button>
+    </span>
+  ));
+};
+
 
   const updateProfile = async(profilepic) => {
     try {
@@ -88,10 +130,6 @@ const Profile = () => {
         }
       );
     }
-
-
-    console.log(image)
-    
   }
 
   return (
@@ -119,6 +157,7 @@ const Profile = () => {
         </label>
         <p><strong>Member since: </strong>{userInfo.date}</p>
         <p><strong>Status: </strong><span className="status">Active</span></p>
+        <p><strong>Delete Account? </strong><button className='deleteaccount' onClick={deleteAccount}>Confirm</button></p>
       </form>
 
 
