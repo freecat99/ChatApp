@@ -70,7 +70,7 @@ select:-webkit-autofill:focus {
 }
 
 .navbar img{
-    width: 75px;
+    width: 10vh;
     margin: .2rem;
 }
 
@@ -245,19 +245,122 @@ select:-webkit-autofill:focus {
 }
 
 .home{
-    border: 1px solid red;
-    min-height: 90vh;
+    min-height: 88vh;
     display: flex;
 }
 
 .sidebar{
-    width: 20vw;
-    border: 1px solid green;
+    width: 35vw;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.799);
+    padding-right: .5rem;
+    border-right: 3px solid #dadde433;
 }
 
 .chatContainer{
     width: 100%;
-    border: 1px solid blue;  
+    display: flex;
+    flex-direction: column;
+}
+
+.noChatContainer{
+    width: 100%;
+    background-color: #0a0e12;
+    background-image: url(/noChatBg.png);
+    background-position: center;
+    background-size: cover;
+
+}
+
+.chatHeader{
+    width: 100%;
+    padding: .51rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.chatContent{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    overflow-y: scroll;
+    
+}
+
+.chatContent button{
+    background-color: #0f1216;
+    padding: 1rem;
+    width: 25vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    margin: .2rem;
+}
+
+.chatContent button:hover,
+.chatContent button:focus{
+    background-color: #1d232a;
+}
+
+.chatContent img{
+    width: 50px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.chatContainerHeader{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: rgba(0, 0, 0, 0.799);
+    padding: 1rem .51rem;
+}
+
+.chatContainerHeader img{
+    width: 50px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.chatContainerHeader span{
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #e8e9ed;
+}
+
+.chatContainerHeader div{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.chatContainerChats{
+    height: 100%;
+    border: 1px solid red;
+}
+
+.chatContainerInput{
+    
+}
+
+.isSelect{
+    background-color: white;
+}
+
+.cancel{
+    font-size: 1.2rem;
+}
+
+.cancel:hover{
+    color: white;
 }
 
 .notFound{

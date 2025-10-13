@@ -9,53 +9,7 @@ import ChatContainer from '../Components/ChatContainer';
 
 const Home = () => {
 
-  const {authUser} = useAuthState(); 
-  const {setMssgLoad, setUserLoad, selectedUser} = useChatState();
-
-  const getUsers = async() =>{
-    try {
-      setUserLoad(true, []);
-
-      const url = "http://localhost:1601/mssg/users";
-      const options= {
-        method:'GET',
-        credentials:'include'
-      };
-      const response = await fetch(url, options);
-      const result = await response.json();
-
-      setUserLoad(false, result);
-
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  
-  const getMssgs = async() =>{
-    try {
-      setMssgLoad(true, []);
-
-      const url = `http://localhost:1601/mssg/${authUser}`;
-      const options= {
-        method:'GET',
-        credentials:'include'
-      };
-      const response = await fetch(url, options);
-      const result = await response.json();
-
-      setMssgLoad(false, result);
-
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-useEffect(()=>{
-  if(authUser){
-    getMssgs();
-    getUsers();
-  }
-},[authUser])
+  const {selectedUser} = useChatState();
 
   return (
     <div className='page'>

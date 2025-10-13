@@ -2,8 +2,8 @@ import React from 'react'
 
 const NoChat = () => {
   return (
-    <div className='chatContainer'>
-      nochat
+    <div className='noChatContainer'>
+      
     </div>
   )
 }

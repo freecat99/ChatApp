@@ -68,7 +68,6 @@ const Navbar = () => {
 
   return (
     <>
-    {(!isLoading)? 
       <div className="navbar">
         <div>
           <img src="./chatterLogo.png" alt="" />
@@ -83,12 +82,7 @@ const Navbar = () => {
           )}
           <button onClick={handleLogout}>{authUser?'Logout':'Login'}</button>
         </div>
-      </div>
-      :
-      <span className="loading loading-dots loading-lg"></span>
-
-    }
-    
+      </div>    
     <Toaster 
         toastOptions={{
           style:{

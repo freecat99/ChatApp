@@ -19,4 +19,9 @@ export const useChatState = create((set) => ({
       messages: fetchedMssgs,
       isMessagesLoading: status,
     }),
+  setSelectedUser: (user) => {
+    set({
+      selectedUser: user
+    })
+  }
 }))
