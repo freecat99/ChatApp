@@ -344,11 +344,72 @@ select:-webkit-autofill:focus {
 
 .chatContainerChats{
     height: 100%;
-    border: 1px solid red;
+    background-color: #00000057;
 }
 
 .chatContainerInput{
+    background-color: #13171c;
     
+}
+
+.inputImageContainer{
+    width: fit-content;
+    padding: .5rem;
+    background-color: #00060e44;
+    display: flex;
+    position: relative;
+}
+
+.inputImageContainer img{
+    max-width: 70px;
+    max-height: 100px;
+    border: 1px solid rgb(80, 80, 80);
+}
+
+.inputImageContainer button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: 1px solid rgb(80, 80, 80);
+    background-color: #000000;
+}
+
+.inputMssgInput{
+    background-color: #060708;
+    width: 100%;
+    display: flex;
+    padding: .71rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.inputMssgInput div:first-child{
+    border: 1px solid rgb(80, 80, 80);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: .4rem;
+    border-radius: 10px;
+    
+}
+
+.inputMssgInput button{
+    color: #dadde4;
+    margin: .5rem;
+}
+
+.inputMssgInput input{
+    color: white;
+    width: 60vw;
+    background-color: transparent;
+}
+
+.inputMssgInput input:focus,
+.inputMssgInput input:active
+{
+    border: none;
+    outline: none;
 }
 
 .isSelect{

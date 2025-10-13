@@ -6,7 +6,7 @@ export const useChatState = create((set) => ({
   selectedUser: null,
 
   isUsersLoading: false,
-  isMessagesLoading: false,
+  isMssgsLoading: false,
 
   setUserLoad: (status, fetchedUsers) =>
     set({
@@ -17,11 +17,15 @@ export const useChatState = create((set) => ({
   setMssgLoad: (status, fetchedMssgs) =>
     set({
       messages: fetchedMssgs,
-      isMessagesLoading: status,
+      isMssgsLoading: status,
     }),
-  setSelectedUser: (user) => {
+  setSelectedUser: (user) => 
     set({
       selectedUser: user
-    })
+    }),
+  setMssg:(data) =>
+    set(state=>({
+      messages:[...state.messages, data]
+    }))
   }
-}))
+))

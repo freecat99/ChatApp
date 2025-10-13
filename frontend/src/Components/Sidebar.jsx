@@ -4,7 +4,7 @@ import { useChatState } from '../States/useChatState';
 
 const Sidebar = () => {
   const {authUser} = useAuthState(); 
-  const {users, setMssgLoad, setUserLoad, isUsersLoading, selectedUser, setSelectedUser} = useChatState();
+  const {users, setUserLoad, isUsersLoading, selectedUser, setSelectedUser} = useChatState();
   
   const getUsers = async() =>{
     try {
@@ -25,32 +25,12 @@ const Sidebar = () => {
         console.log(error);
       }
     }
-    
-    const getMssgs = async() =>{
-      try {
-        setMssgLoad(true, []);
-
-        const url = `http://localhost:1601/mssg/${authUser}`;
-        const options= {
-          method:'GET',
-          credentials:'include'
-        };
-        const response = await fetch(url, options);
-        const result = await response.json();
-  
-        setMssgLoad(false, result);
-  
-      } catch (error) {
-        console.log(error);
-      }
-    }
   
   useEffect(()=>{
     if(authUser){
-      getMssgs();
       getUsers();
     }
-  },[authUser], selectedUser);
+  },[authUser]);
 
   if(isUsersLoading) return <div>
       <div className="w-[100vw] h-full flex items-center justify-center">
