@@ -16,8 +16,9 @@ export const useAuthState = create((set, get) => ({
       });
 
       const result = await response.json();
-      set({ authUser: result._id });
-      get().connectSocket();
+      const user = result;
+      set({ authUser: user });
+      get().connectSocket(user);
 
     } catch (error) {
       set({ authUser: null });
@@ -29,9 +30,17 @@ export const useAuthState = create((set, get) => ({
     const {authUser} = get();
     if(!authUser || get().socket?.connected) return;
 
-    const socket = io(BASE_URL);
+    const socket = io(BASE_URL, {
+      query: {
+        userId: authUser._id
+      }
+    });
     socket.connect();
-    set({socket:socket})
+    set({socket:socket});
+
+    socket.on('getOnlineUsers', (onlineUsers) => {
+      console.log("Online users:", onlineUsers);
+    });
 
   },
   disconnectSocket: () =>{

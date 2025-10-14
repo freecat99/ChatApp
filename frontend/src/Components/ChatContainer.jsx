@@ -3,11 +3,14 @@ import { FaTimes } from "react-icons/fa";
 import { useChatState } from '../States/useChatState'
 import { useAuthState } from '../States/useAuthState';
 import MssgInput from './MssgInput';
+import { useReducer } from 'react';
+import { useRef } from 'react';
 
 const ChatContainer = () => {
   
   const {authUser} = useAuthState(); 
-  const {messages, setMssgLoad, isMssgsLoading, selectedUser, setSelectedUser} = useChatState();
+  const {messages, setMssgLoad, isMssgsLoading, selectedUser, setSelectedUser, subscribeToMessages, unsubscribeToMessages} = useChatState();
+  const messageEndRef = useRef(null);
 
 
   const getMssgs = async() =>{
@@ -21,7 +24,6 @@ const ChatContainer = () => {
           };
           const response = await fetch(url, options);
           const result = await response.json();
-    console.log("Fetched messages:", result);
 
           setMssgLoad(false, result);
     
@@ -33,8 +35,17 @@ const ChatContainer = () => {
     useEffect(()=>{
       if(authUser && selectedUser._id){
         getMssgs();
+        subscribeToMessages();
+
+        return ()=>unsubscribeToMessages();
       }
-    },[selectedUser._id]);
+    },[selectedUser._id, subscribeToMessages, unsubscribeToMessages]);
+
+    useEffect(()=>{
+      if(messageEndRef.current && messages){
+        messageEndRef.current.scrollIntoView({behavior: 'smooth'});
+      }
+    }, [messages]);
   
 
   if (isMssgsLoading) {
@@ -83,10 +94,10 @@ const ChatContainer = () => {
         {messages && messages.map((mssg)=>(
           <div 
             key={mssg._id}
-            className={`chat ${(mssg.senderId===selectedUser._id)?'chat-start':'chat-end'}`}>
+            className={`chat ${(mssg.senderId===selectedUser._id)?'chat-start':'chat-end'}`} ref={messageEndRef}>
               <div
                 className='chat-header mb-1'>
-                  <time datetime="" className='text-xs opacity-55 ml-1'>
+                  <time dateTime="" className='text-xs opacity-55 ml-1'>
                     {new Date(mssg.createdAt).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit', hour12: false})}
                   </time>
               </div>
