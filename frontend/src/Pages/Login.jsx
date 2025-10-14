@@ -8,7 +8,7 @@ import { useAuthState } from '../States/useAuthState';
 
 const Login = () => {
   const navigate = useNavigate();
-  const {setAuthUser} = useAuthState();
+  const {setAuthUser, connectSocket} = useAuthState();
   const [show, setShow] = useState(false);
   const [userInfo, setUserInfo] = useState({
     email:'',
@@ -48,6 +48,7 @@ const Login = () => {
     }else{
       toast.success('Logged in!', {position:'bottom-right'});
       setAuthUser(result.token);
+      connectSocket();
       setTimeout(()=>{
         navigate('/home');
       },2000)

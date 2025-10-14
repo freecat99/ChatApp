@@ -4,7 +4,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
-  const {authUser} = useAuthState(); 
+  const {authUser, setAuthUser, disconnectSocket} = useAuthState(); 
   const [isLoading, setIsLoading] = useState(true);
   const [userInfo, setUserInfo] = useState({
     name:'',
@@ -46,6 +46,8 @@ const Navbar = () => {
       const response = await fetch(url, options);
       const result = await response.json();
       toast.success(result.message, {position:'bottom-right'});
+      setAuthUser(null);
+      disconnectSocket();
 
       setTimeout(()=>{
         window.location.reload();

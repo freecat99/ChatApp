@@ -1,8 +1,12 @@
-import { create } from 'zustand';
+import { create } from 'zustand'
+import { io } from 'socket.io-client'
 
-export const useAuthState = create((set) => ({
+const BASE_URL = 'http://localhost:1601';
+
+export const useAuthState = create((set, get) => ({
   authUser: null,
   isCheckingAuth: true,
+  socket: null,
 
   checkAuth: async () => {
     try {
@@ -13,12 +17,26 @@ export const useAuthState = create((set) => ({
 
       const result = await response.json();
       set({ authUser: result._id });
+      get().connectSocket();
+
     } catch (error) {
       set({ authUser: null });
     } finally {
       set({ isCheckingAuth: false });
     }
   },
+  connectSocket: () =>{
+    const {authUser} = get();
+    if(!authUser || get().socket?.connected) return;
 
-  setAuthUser: (user) => set({ authUser: user }),
+    const socket = io(BASE_URL);
+    socket.connect();
+    set({socket:socket})
+
+  },
+  disconnectSocket: () =>{
+    if(get().socket?.connected) get().socket.disconnect();
+  },
+
+  setAuthUser: (user) => set({ authUser: user })
 }));

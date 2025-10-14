@@ -44,7 +44,7 @@ const Register = () => {
     if(result.error){
       toast.error(result.error, {position:'bottom-right'});
     }else{
-      toast.success('Registered!', {position:'bottom-right'})
+      toast.success('Registered!', {position:'bottom-right'});
       setTimeout(()=>{
         navigate('/login');
       }, 2000)

@@ -6,12 +6,12 @@ import cors from 'cors'
 import authRouter from './Routes/authRouter.js';
 import mssgRouter from './Routes/mssgRouter.js';
 import { connectDB } from './Lib/db.js';
+import { app, server } from './Lib/socket.js';
 
 
 dotenv.config();
 const PORT = process.env.PORT || 1600;
 
-const app = express();
 
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ limit: '10mb' }));
@@ -26,7 +26,7 @@ app.use('/auth', authRouter);
 app.use('/mssg', mssgRouter);
 
 
-app.listen(PORT, ()=>{
+server.listen(PORT, ()=>{
     console.log(`Server started at: ${PORT}`);
     connectDB();
 })
