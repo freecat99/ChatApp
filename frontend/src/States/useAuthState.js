@@ -17,6 +17,12 @@ export const useAuthState = create((set, get) => ({
 
       const result = await response.json();
       const user = result;
+
+      if (!response.ok) {
+        set({ authUser: null });
+        return;
+      }
+
       set({ authUser: user });
       get().connectSocket(user);
 
